@@ -34,8 +34,8 @@ jobs:
       - name: Build the tagged Docker image
         shell: bash
         run: |
-          docker build -t $CONTAINER_REGISTRY/${{ github.repository_owner }}/$( echo ${{ github.repository }} | sed 's|.*/containered-||' )/${GITHUB_REF##*/} .
-        # docker build -t $CONTAINER_REGISTRY/${{ github.repository_owner }}/$( echo ${{ github.repository }} | sed 's|.*/containered-||' )/latest .
+          docker build -t $CONTAINER_REGISTRY/${{ github.repository_owner }}/$( echo ${{ github.repository }} | sed 's|.*/containered-||' ):${GITHUB_REF##*/} .
+        # docker build -t $CONTAINER_REGISTRY/${{ github.repository_owner }}/$( echo ${{ github.repository }} | sed 's|.*/containered-||' ):latest .
 
       - name: Log into container registry
         shell: bash
@@ -45,8 +45,8 @@ jobs:
       - name: Push the tagged Docker image
         shell: bash
         run: |
-          docker push $CONTAINER_REGISTRY/${{ github.repository_owner }}/$( echo ${{ github.repository }} | sed 's|.*/containered-||' )/${GITHUB_REF##*/}
-        # docker push $CONTAINER_REGISTRY/${{ github.repository_owner }}/$( echo ${{ github.repository }} | sed 's|.*/containered-||' )/latest
+          docker push $CONTAINER_REGISTRY/${{ github.repository_owner }}/$( echo ${{ github.repository }} | sed 's|.*/containered-||' ):${GITHUB_REF##*/}
+        # docker push $CONTAINER_REGISTRY/${{ github.repository_owner }}/$( echo ${{ github.repository }} | sed 's|.*/containered-||' ):latest
 
       - name: Log out of container registry
         shell: bash
